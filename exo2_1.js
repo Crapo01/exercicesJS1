@@ -12,4 +12,9 @@ function adding(num){
 adding(array);
 
 console.log(`La somme des elements est: ${result}`)
+
+// TEST AVEC METHODE MAP ####################################
+result = 0
+array.map((num)=> result+=num);
+console.log(`La somme des elements avec map est: ${result}`)
 }
