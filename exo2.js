@@ -1,5 +1,5 @@
-main();
-function main() {
+// main();
+(function main() {
 alert("exo2");
 
 let numberA=parseInt(prompt("type number A"));
@@ -12,4 +12,4 @@ result= numberA * numberB
 console.log(`MULTIPLICATION: ${numberA} * ${numberB} = ${result}`)
 result= numberA / numberB
 console.log(`DIVISION: ${numberA} / ${numberB} = ${result}`)
-}
+})();
