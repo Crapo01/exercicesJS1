@@ -10,5 +10,6 @@ function main() {
     }
 
     tableau.map(sortEvens)
+    console.log(`tableau à filtrer: ${tableau}`);
     console.log(`tableau des pairs: ${tableauPair}`);
 }

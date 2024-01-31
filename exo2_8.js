@@ -11,8 +11,7 @@ function main() {
     function moy() {
         let result=0
         tableau.forEach(element => {
-            result += element;
-            console.log(result);
+            result += element;            
         });       
         
         let moyenne = result / tableau.length;
@@ -20,5 +19,5 @@ function main() {
     }
 
     let moyenne = moy();
-    console.log(`moyenne du tableau: ${moyenne}`);
+    console.log(`la moyenne du tableau ${tableau} est: ${moyenne}`);
 }
