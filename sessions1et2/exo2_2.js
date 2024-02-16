@@ -15,7 +15,7 @@ console.log(`le chiffre ${searched} est il present dans l'array ${array}? ${foun
 
 searched = 6;
 found =false;
-array.map((num) => {
+array.map(num => {
     if (num === searched) found =true;
 });
 console.log(`le chiffre ${searched} est il present dans l'array ${array}? ${found} `);

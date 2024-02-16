@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex7</title>
+    <link rel="stylesheet" href="/session3/stylesheet.css">
+    <style>
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Dropdown button on hover & focus */
+        .dropbtn:hover,
+        .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content li {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content li:hover {
+            background-color: #3a3636;
+        }
+
+        /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="Time Zone">
+        <button onclick="myFunction()" class="dropbtn">Time zone</button>
+        <ul id="myDropdown" class="dropdown-content">
+            <li>"time zone -11.00"</li>
+            <li>"time zone -10.00"</li>
+            <li>"time zone -9.00"</li>
+            <li>"time zone -8.00"</li>
+            <li>"time zone -7.00"</li>
+            <li>"time zone -6.00"</li>
+            <li>"time zone -5.00"</li>
+            <li>"time zone -4.00"</li>
+            <li>"time zone -3.00"</li>
+            <li>"time zone -2.00"</li>
+            <li>"time zone -1.00"</li>
+            <li>"time zone UTC"</li>
+            <li>"time zone +1.00"</li>
+            <li>"time zone +2.00"</li>
+            <li>"time zone +3.00"</li>
+            <li>"time zone +4.00"</li>
+            <li>"time zone +5.00"</li>
+            <li>"time zone +6.00"</li>
+            <li>"time zone +7.00"</li>
+            <li>"time zone +8.00"</li>
+            <li>"time zone +9.00"</li>
+            <li>"time zone +10.00"</li>
+            <li>"time zone +11.00"</li>
+
+
+        </ul>
+    </div>
+
+    <script src="exercice7.js"></script>
+</body>
+
+</html>
