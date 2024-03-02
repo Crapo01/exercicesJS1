@@ -70,7 +70,7 @@ function main() {
     addPromise(5, urlTodos);
     console.log(queueArray);
     
-    
+    console.log("End of script ex5 is here");
     
     
 }

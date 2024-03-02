@@ -43,6 +43,6 @@ function main() {
     
     
     getDatasWithFetch(urlUsers);    
-    console.log("End of script ex 2 here");
+    console.log("End of script ex 4 here");
 }
 main();

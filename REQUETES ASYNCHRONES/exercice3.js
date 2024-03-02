@@ -55,5 +55,6 @@ function main() {
     console.log("final:", results);
   }
   displayResult();
+  console.log("End of script ex3 is here");
 }
 main();

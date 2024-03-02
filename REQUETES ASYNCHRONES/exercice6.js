@@ -1,77 +1,61 @@
 function main() {
 
-    class Request {
-        constructor(prio, url) {
-            this.prio = prio;
-            this.url = url;
+    class CacheManager {
+        constructor() {
+            this.storage = window.localStorage;
+        }
+        checkLocalStorage(key,url) {
+            
+            
+            if (!this.storage.getItem(key)) {
+                console.log("################# set in localStorage #################");
+                setLocalStorage(url, key,this);              
+                
+            }else{
+                console.log("################# get from localStorage #####################")                
+                this.key =JSON.parse(this.storage.getItem(key));
+                logData();
+            }
+                
+            
         }
     }
-    let pendingPromises = new Array();    
-    let queueArray = [new Array(), new Array(), new Array(), new Array(), new Array()]
+    async function setLocalStorage(url, key) {
+        
+            response=fetch(url)
+            response
+            .then(resp=> {
+                console.log(resp);
+                return (resp.json());
+
+            })
+            .then(resp=> {
+                console.log("json object passed:");
+                console.log(resp);
+                resp=JSON.stringify(resp);                
+                // set les data JSON STRINGIFIED
+                window.localStorage.setItem(key, resp);                
+                logData();
+            })
+            
+            
+        }
+        
+    
+
+
     const urlUsers = "https://jsonplaceholder.typicode.com/users"
-    const url51 = "https://hjdfkhofhio"
-    const urlComments = "https://jsonplaceholder.typicode.com/comments"
     const urlPhotos = "https://jsonplaceholder.typicode.com/photos"
-    const urlTodos = "https://jsonplaceholder.typicode.com/todos"
-    const urlFbck = "https://jsonplaceholder.typicode.com/albums"
 
-    function pushPromise(prio, url) {
-        pendingPromises.push(new Request(prio, url));
+    function logData() {
+        console.log("logData:");
+        console.log(cacheManager.storage);        
     }
 
-    function addPromise(prio, url) {
-        console.log("new promise added")
-        pendingPromises.push(new Request(prio, url));
-        pendingPromises.forEach(promise => {            
-            queueArray[(promise.prio) - 1].push(promise)
-        }); 
-        sortAndRequest();       
-    }
-
-    async function getDatas(url) {
-        let data, response;
-        try {
-
-            response = await fetch(url);
-            console.log(" try " + url);
-            console.log(response);
-            data = await response.json();
-            if (!response.ok) {
-                throw new Error("response not OK")
-            } else return (data);
-
-
-        }
-
-        catch (error) {
-            console.warn(error);
-            // throw:retourne la valeur error et passe la promise en rejected
-            throw error
-        }
-
-    }
     
-    function sortAndRequest() {
-        console.log("sort prio and sending requests")
-        setTimeout(()=>{
-            for (let i = 4; i >= 0; i--) { 
-            queueArray[i].forEach(promise=>getDatas(promise.url));
-            } 
-        },1000)
-       
-    }
-
-    pushPromise(3, urlUsers);
-    pushPromise(1, urlComments);
-    pushPromise(1, urlComments);
-    pushPromise(1, urlComments);
-    pushPromise(4, urlPhotos);
-    console.log(pendingPromises);
-    addPromise(5, urlTodos);
-    console.log(queueArray);
-    
-    
-    
-    
+    let cacheManager = new CacheManager()
+    cacheManager.checkLocalStorage("users",urlUsers);
+    cacheManager.checkLocalStorage("photos",urlPhotos);
+    console.log("End of script ex6 is here");
 }
 main();
