@@ -6,15 +6,10 @@ function main() {
             this.url = url;
         }
     }
+    
     let pendingPromises = new Array();    
     let queueArray = [new Array(), new Array(), new Array(), new Array(), new Array()]
-    const urlUsers = "https://jsonplaceholder.typicode.com/users"
-    const url51 = "https://hjdfkhofhio"
-    const urlComments = "https://jsonplaceholder.typicode.com/comments"
-    const urlPhotos = "https://jsonplaceholder.typicode.com/photos"
-    const urlTodos = "https://jsonplaceholder.typicode.com/todos"
-    const urlFbck = "https://jsonplaceholder.typicode.com/albums"
-
+    
     function pushPromise(prio, url) {
         pendingPromises.push(new Request(prio, url));
     }

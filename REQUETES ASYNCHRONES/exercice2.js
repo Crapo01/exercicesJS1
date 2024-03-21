@@ -7,8 +7,7 @@ function main() {
             this.address = address;
         }
     }
-    const urlUsers = "https://jsonplaceholder.typicode.com/users"
-    const url51 = "https://hjdfkhofhio"
+    
     
     async function getDatasWithFetch(url) {
         

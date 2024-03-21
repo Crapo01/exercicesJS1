@@ -9,7 +9,7 @@ function main() {
     }
 
     
-    const urlUsers = "https://jsonplaceholder.typicode.com/users"
+    
     // compteur de tentatives
     let attemptCount=1;
     // nbre de co qui doivent echouer

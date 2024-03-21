@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Basic Snake HTML Game</title>
+    <meta charset="UTF-8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="400" height="400" id="game"></canvas>
+    <script>
+        var canvas = document.getElementById('game');
+        var context = canvas.getContext('2d');
+
+
+        var gridNumberOfCells = 40;
+        var gridCellSize = canvas.width / gridNumberOfCells;
+        console.log(gridCellSize);
+        console.log(canvas.width);
+        const fpsReducerMultiplicator = 4;
+        var count = 0;
+
+        var snake = {
+            x: getRandomInt(0, gridNumberOfCells) * gridCellSize,
+            y: getRandomInt(0, gridNumberOfCells) * gridCellSize,
+
+
+            velocityX: gridCellSize,
+            velocityY: 0,
+
+
+            cellsOccupiedBySnake: [],
+
+
+            snakeSize: 20
+        };
+        var apple = {
+            x: getRandomInt(0, gridNumberOfCells) * gridCellSize,
+            y: getRandomInt(0, gridNumberOfCells) * gridCellSize
+        };
+        
+        
+        // get random whole numbers in a specific range
+        // @see https://stackoverflow.com/a/1527820/2124254
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        function startGame() {
+            requestAnimationFrame(gameLoop);            
+        }
+        
+        function resetGame() {
+            
+            snake.x = getRandomInt(0, gridNumberOfCells) * gridCellSize;
+            snake.y = getRandomInt(0, gridNumberOfCells) * gridCellSize;
+            snake.cellsOccupiedBySnake = [];
+            snake.snakeSize = 4;
+            snake.velocityX = gridCellSize;
+            snake.velocityY = 0;
+            
+            apple.x = getRandomInt(0, gridNumberOfCells) * gridCellSize;
+            apple.y = getRandomInt(0, gridNumberOfCells) * gridCellSize;
+        }
+        
+
+        function gameLoop() {
+
+            function drawApple() {
+                context.fillStyle = 'red';
+                context.fillRect(apple.x, apple.y, gridCellSize - 1, gridCellSize - 1);
+            }
+
+            function trimSnakeTailAfterMove() {
+                if (snake.cellsOccupiedBySnake.length > snake.snakeSize) {
+                    snake.cellsOccupiedBySnake.pop();
+                }
+            }
+            
+            function warpSnakePositionOnEdges() {
+                if (snake.x < 0) {
+                    snake.x = canvas.width - gridCellSize;
+                }
+                else if (snake.x >= canvas.width) {
+                    snake.x = 0;
+                }
+
+
+                if (snake.y < 0) {
+                    snake.y = canvas.height - gridCellSize;
+                }
+                else if (snake.y >= canvas.height) {
+                    snake.y = 0;
+                }
+            }
+
+            function addSnakeHeadPositionAtTheBeginningOfArray() {
+                snake.cellsOccupiedBySnake.unshift({ x: snake.x, y: snake.y });
+            }
+
+            requestAnimationFrame(gameLoop);
+
+            // slow game loop
+            if (++count < fpsReducerMultiplicator) {
+                return;
+            }
+
+            count = 0;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+
+            snake.x += snake.velocityX;
+            snake.y += snake.velocityY;
+
+            warpSnakePositionOnEdges()
+
+
+            addSnakeHeadPositionAtTheBeginningOfArray()
+            
+
+            trimSnakeTailAfterMove()
+
+
+            drawApple()
+
+            
+            context.fillStyle = 'green';
+            snake.cellsOccupiedBySnake.forEach(function (snakeBodyPart, index) {
+
+                // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
+                context.fillRect(snakeBodyPart.x, snakeBodyPart.y, gridCellSize - 1, gridCellSize - 1);
+
+                
+                if (snakeBodyPart.x === apple.x && snakeBodyPart.y === apple.y) {
+                    snake.snakeSize++;
+
+                    
+                    apple.x = getRandomInt(0, gridNumberOfCells) * gridCellSize;
+                    apple.y = getRandomInt(0, gridNumberOfCells) * gridCellSize;
+                }
+
+                // check collision with all cells after this one (modified bubble sort)
+                for (var i = index + 1; i < snake.cellsOccupiedBySnake.length; i++) {
+
+                    
+                    if (snakeBodyPart.x === snake.cellsOccupiedBySnake[i].x && snakeBodyPart.y === snake.cellsOccupiedBySnake[i].y) {
+                        resetGame();
+                    }
+                }
+            });
+        }
+
+        
+        document.addEventListener('keydown', function (e) {
+            // prevent snake from backtracking on itself by checking that it's
+            // not already moving on the same axis (pressing left while moving
+            // left won't do anything, and pressing right while moving left
+            // shouldn't let you collide with your own body)
+
+            // left arrow key
+            if (e.which === 37 && snake.velocityX === 0) {
+                snake.velocityX = -gridCellSize;
+                snake.velocityY = 0;
+            }
+            // up arrow key
+            else if (e.which === 38 && snake.velocityY === 0) {
+                snake.velocityY = -gridCellSize;
+                snake.velocityX = 0;
+            }
+            // right arrow key
+            else if (e.which === 39 && snake.velocityX === 0) {
+                snake.velocityX = gridCellSize;
+                snake.velocityY = 0;
+            }
+            // down arrow key
+            else if (e.which === 40 && snake.velocityY === 0) {
+                snake.velocityY = gridCellSize;
+                snake.velocityX = 0;
+            }
+        });
+
+        startGame()
+    </script>
+</body>
+
+</html>

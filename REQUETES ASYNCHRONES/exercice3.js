@@ -1,11 +1,6 @@
 function main() {
 
-  const urlUsers = "https://jsonplaceholder.typicode.com/users"
-  const url51 = "https://hjdfkhofhio"
-  const urlComments = "https://jsonplaceholder.typicode.com/comments"
-  const urlPhotos = "https://jsonplaceholder.typicode.com/photos"
-  const urlTodos = "https://jsonplaceholder.typicode.com/todos"
-  const urlFbck = "https://jsonplaceholder.typicode.com/albums"
+  
 
   async function getDatas(url) {
     let data, response;

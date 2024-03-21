@@ -22,7 +22,7 @@ function main() {
     }
     async function setLocalStorage(url, key) {
         
-            response=fetch(url)
+            response= fetch(url)
             response
             .then(resp=> {
                 console.log(resp);
@@ -44,8 +44,7 @@ function main() {
     
 
 
-    const urlUsers = "https://jsonplaceholder.typicode.com/users"
-    const urlPhotos = "https://jsonplaceholder.typicode.com/photos"
+    
 
     function logData() {
         console.log("logData:");
